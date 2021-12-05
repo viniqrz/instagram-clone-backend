@@ -9,7 +9,11 @@ export const multerConfig: multer.Options = {
       "image/png",
       "image/jpg",
       "image/gif"
-    ]
+    ];
+
+    if (mimetypes.includes(file.mimetype)) {
+      cb(null, true);
+    }
   },
   limits: {
     fileSize: 1.5 * 1024 * 1024,

@@ -13,8 +13,8 @@ const start = async () => {
   try {
     createMiddlewares(app);
     createRoutes(app);
-    startServer(app);
     createGlobalErrorHandler(app);
+    startServer(app);
   } catch(err) {
     if (err instanceof Error) console.log(`Couldn't start server: ${err.message}`);
   }
