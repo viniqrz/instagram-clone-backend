@@ -1,7 +1,7 @@
-import { UserDto, UserWithoutPassword } from "../@types/dtos/UserDto";
-import { omitPassword } from "../helpers/omitPassword";
-import { UserModel } from "../models/User";
-import { AppError } from "../@types/errors/AppError";
+import { UserDto, UserWithoutPassword } from "../../@types/dtos/UserDto";
+import { omitPassword } from "../../helpers/omitPassword";
+import { UserModel } from "../../models/User";
+import { AppError } from "../../@types/errors/AppError";
 import { hash } from "bcrypt";
 
 export class SignUpUseCase {
@@ -16,5 +16,6 @@ export class SignUpUseCase {
     const doc = await UserModel.create(dto);
     const userWithoutPassword = omitPassword(doc);
     
+    return userWithoutPassword;
   }
 }
