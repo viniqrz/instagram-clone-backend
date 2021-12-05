@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 
 export const catchAsync = (fn: any) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      fn(req, res);
+      fn(req, res, next);
     } catch (err) {
       next(err);
     }
