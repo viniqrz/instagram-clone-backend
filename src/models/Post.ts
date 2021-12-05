@@ -4,10 +4,12 @@ import { Post } from "../@types/models/Post";
 const postSchema = new Schema<Post>({
   text: {
     type: String,
-    required: [true, 'Post must have a text content']
+    required: [true, 'Post must have a text content'],
+    maxlength: [500, 'Max-length of post text content is 500 characters']
   },
   user: {
     type: Schema.Types.ObjectId,
+    required: [true, 'Post must have a user'],
     ref: 'User',
   },
   likes: {
