@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import { model, Schema } from 'mongoose';
-import { File } from '../@types/models/FIle';
+import { File } from '../@types/models/File';
 
 const fileSchema = new Schema<File>({
   key: {

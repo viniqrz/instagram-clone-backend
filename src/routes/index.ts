@@ -2,7 +2,6 @@ import path from 'path';
 
 import express, { Express } from 'express';
 
-import { filesRouter } from './filesRouter';
 import { userRouter } from './userRouter';
 import { postRouter } from './postRouter';
 
