@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { validationResult } from 'express-validator';
 import { catchAsync } from '../../helpers/catchAsync';
 import { SignUpUseCase } from './SignUpUseCase';
 
@@ -16,7 +17,7 @@ export class SignUpController {
 
     res.json({
       status: 'success',
-      user,
+      data: { user },
     });
   }
 }
