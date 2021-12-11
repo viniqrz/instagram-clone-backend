@@ -7,6 +7,7 @@ export class UploadFileController {
     this.handle = catchAsync(this.handle);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async handle(req: Request, res: Response, next: NextFunction) {
     const uploadFileUseCase = new UploadFileUseCase();
     const file = await uploadFileUseCase.execute(req.file.filename);

@@ -1,7 +1,6 @@
 import { Schema } from 'mongoose';
 
-export interface IComment {
+export interface CommentDto {
   text: string;
   user: Schema.Types.ObjectId;
-  createdAt: Date;
 }

@@ -1,7 +1,7 @@
-import { model, Schema } from "mongoose";
-import { Comment } from "../@types/models/Comment";
+import { Document, model, Schema } from 'mongoose';
+import { IComment } from '../@types/models/Comment';
 
-const commentSchema = new Schema<Comment>({
+const commentSchema = new Schema<IComment>({
   text: {
     type: String,
     required: [true, 'Comment must have a text content'],
@@ -14,9 +14,9 @@ const commentSchema = new Schema<Comment>({
   createdAt: {
     type: Date,
     default: new Date(),
-  }
+  },
 });
 
-const CommentModel = model<Comment>("Comment", commentSchema);
+const CommentModel = model<IComment>('Comment', commentSchema);
 
 export { CommentModel };
