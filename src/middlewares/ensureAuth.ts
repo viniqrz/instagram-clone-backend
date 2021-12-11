@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 import { NextFunction, Response } from 'express';
 import { JwtPayload, verify } from 'jsonwebtoken';
+import { AppError } from '../@types/errors/AppError';
 import { IRequest } from '../@types/express/IRequest';
 
 export function ensureAuth(req: IRequest, res: Response, next: NextFunction) {
@@ -15,6 +16,6 @@ export function ensureAuth(req: IRequest, res: Response, next: NextFunction) {
 
     next();
   } catch (err) {
-    next(err);
+    next(new AppError(401, `Couldn't authenticate: ${err.message}`));
   }
 }

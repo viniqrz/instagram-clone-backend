@@ -8,6 +8,7 @@ export class CreatePostController {
     this.handle = catchAsync(this.handle);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async handle(req: IRequest, res: Response, next: NextFunction) {
     const createPostUseCase = new CreatePostUseCase();
 
