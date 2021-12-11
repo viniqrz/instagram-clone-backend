@@ -2,6 +2,6 @@ import { Schema } from 'mongoose';
 
 export interface PostDto {
   text: string;
-  file: Schema.Types.ObjectId;
+  file: string;
   user: Schema.Types.ObjectId;
 }

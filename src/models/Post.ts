@@ -8,7 +8,7 @@ const postSchema = new Schema<Post>({
     maxlength: [500, 'Max-length of post text content is 500 characters'],
   },
   file: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: [true, 'Post must have a file'],
   },
   user: {
@@ -28,6 +28,26 @@ const postSchema = new Schema<Post>({
     type: Date,
     default: new Date(),
   },
+});
+
+postSchema.pre('save', function (next) {
+  this.populate({
+    path: 'user',
+    select: '-password',
+  });
+
+  next();
+});
+
+postSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: '-password',
+  })
+    .populate({ path: 'likes', select: '-password' })
+    .populate({ path: 'comments', select: '-password' });
+
+  next();
 });
 
 const PostModel = model<Post>('Post', postSchema);
