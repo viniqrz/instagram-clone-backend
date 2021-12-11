@@ -5,6 +5,6 @@ import { postRouter } from './postRouter';
 
 export const createRoutes = (app: Express) => {
   app.use(filesRouter);
-  app.use(userRouter);
-  app.use(postRouter);
+  app.use('/users', userRouter);
+  app.use('/posts', postRouter);
 };
