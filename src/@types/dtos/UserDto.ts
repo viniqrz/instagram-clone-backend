@@ -1,7 +1,13 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 import { User } from '../models/User';
 
-export interface UserDto extends User {}
+export interface UserDto {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  avatar?: string;
+}
 
 export interface PartialUser {
   name?: string;

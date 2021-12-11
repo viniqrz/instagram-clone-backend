@@ -1,11 +1,14 @@
-import { model, Schema } from "mongoose";
-import { Post } from "../@types/models/Post";
+import { model, Schema } from 'mongoose';
+import { Post } from '../@types/models/Post';
 
 const postSchema = new Schema<Post>({
   text: {
     type: String,
     required: [true, 'Post must have a text content'],
-    maxlength: [500, 'Max-length of post text content is 500 characters']
+    maxlength: [500, 'Max-length of post text content is 500 characters'],
+  },
+  image: {
+    type: String,
   },
   user: {
     type: Schema.Types.ObjectId,
@@ -23,9 +26,9 @@ const postSchema = new Schema<Post>({
   createdAt: {
     type: Date,
     default: new Date(),
-  }
+  },
 });
 
-const PostModel = model<Post>("Post", postSchema);
+const PostModel = model<Post>('Post', postSchema);
 
 export { PostModel };

@@ -1,8 +1,8 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 export interface Post {
   text: string;
-  image: Schema.Types.ObjectId;
+  image: string;
   user: Schema.Types.ObjectId;
   comments?: Schema.Types.ObjectId[];
   likes?: Schema.Types.ObjectId[];

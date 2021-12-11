@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 export interface User {
   name: string;
@@ -6,7 +6,7 @@ export interface User {
   email: string;
   password: string;
   avatar?: string;
-  posts: Schema.Types.ObjectId[];
-  followers: Schema.Types.ObjectId[];
-  following: Schema.Types.ObjectId[];
+  posts?: Schema.Types.ObjectId[];
+  followers?: Schema.Types.ObjectId[];
+  following?: Schema.Types.ObjectId[];
 }
