@@ -8,6 +8,8 @@ import { IRequest } from '../@types/express/IRequest';
 export function ensureAuth(req: IRequest, res: Response, next: NextFunction) {
   try {
     const bearer = req.headers.authorization;
+    if (!bearer) throw new Error('No token sent!');
+
     const [, token] = bearer.split(' ');
 
     const { data } = verify(token, process.env.JWT_SECRET) as JwtPayload;
