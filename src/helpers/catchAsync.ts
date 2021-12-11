@@ -7,5 +7,5 @@ export const catchAsync = (fn: any) => {
     } catch (err) {
       next(err);
     }
-  }
-}
+  };
+};

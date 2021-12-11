@@ -21,6 +21,7 @@ export interface PartialUser {
 }
 
 export interface UserWithoutPassword {
+  _id: Schema.Types.ObjectId;
   name: string;
   username: string;
   email: string;
