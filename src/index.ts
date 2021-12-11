@@ -8,6 +8,8 @@ import { startServer } from './config/server/startServer';
 import { createGlobalErrorHandler } from './config/server/createGlobalErrorHandler';
 import { connectDatabase } from './config/database';
 
+import './models/Comment';
+
 const app = express();
 
 const start = async () => {

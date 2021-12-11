@@ -10,6 +10,7 @@ export class GetPostController {
   public async handle(
     req: Request,
     res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ): Promise<void> {
     const post = await new GetPostUseCase().execute(req.params.id);
