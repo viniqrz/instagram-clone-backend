@@ -8,7 +8,7 @@ export const generateJwt = (user: UserWithoutPassword, expiresIn: string) => {
     {
       data: user,
     },
-    process.env.JWT_SECRET!,
+    process.env.JWT_SECRET,
     { expiresIn }
   );
 };

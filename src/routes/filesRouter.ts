@@ -1,7 +1,7 @@
-import express, { Router } from "express";
+import { Router } from 'express';
 
 const router = Router();
 
-router.get('/files', express.static('../../tmp/uploads'));
+router.post('/');
 
-export { router as filesRouter };
+export { router as fileRouter };

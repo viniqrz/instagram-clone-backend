@@ -13,7 +13,7 @@ export class AuthenticateController {
     const { username, password } = req.body;
 
     const authenticateUseCase = new AuthenticateUseCase();
-    const userAndToken = authenticateUseCase.execute(username, password);
+    const userAndToken = await authenticateUseCase.execute(username, password);
 
     res.status(200).json({
       status: 'success',
