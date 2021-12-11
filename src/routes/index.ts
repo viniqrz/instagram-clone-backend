@@ -5,6 +5,7 @@ import express, { Express } from 'express';
 import { userRouter } from './userRouter';
 import { postRouter } from './postRouter';
 import { fileRouter } from './fileRouter';
+import { commentRouter } from './commentRouter';
 
 export const createRoutes = (app: Express) => {
   app.use(
@@ -15,4 +16,5 @@ export const createRoutes = (app: Express) => {
   app.use('/files', fileRouter);
   app.use('/users', userRouter);
   app.use('/posts', postRouter);
+  app.use('/comments', commentRouter);
 };
