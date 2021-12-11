@@ -14,7 +14,7 @@ export class CreatePostController {
 
     const dto = {
       text: req.body.text,
-      image: `${req.protocol}://${req.hostname}/files/${req.file.filename}`,
+      file: req.body.file,
       user: req.user._id,
     };
 

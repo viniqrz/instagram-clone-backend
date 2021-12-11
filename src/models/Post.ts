@@ -7,8 +7,9 @@ const postSchema = new Schema<Post>({
     required: [true, 'Post must have a text content'],
     maxlength: [500, 'Max-length of post text content is 500 characters'],
   },
-  image: {
-    type: String,
+  file: {
+    type: Schema.Types.ObjectId,
+    required: [true, 'Post must have a file'],
   },
   user: {
     type: Schema.Types.ObjectId,
