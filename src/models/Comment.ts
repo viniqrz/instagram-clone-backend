@@ -11,10 +11,26 @@ const commentSchema = new Schema<IComment>({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  post: {
+    type: Schema.Types.ObjectId,
+    ref: 'Post',
+  },
   createdAt: {
     type: Date,
     default: new Date(),
   },
+});
+
+commentSchema.pre('save', function (next) {
+  this.populate({ path: 'user', select: '-password' });
+
+  next();
+});
+
+commentSchema.pre(/^find/, function (next) {
+  this.populate({ path: 'user', select: '-password' });
+
+  next();
 });
 
 const CommentModel = model<IComment>('Comment', commentSchema);

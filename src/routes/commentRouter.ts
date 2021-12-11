@@ -4,7 +4,7 @@ import { ensureAuth } from '../middlewares/ensureAuth';
 import { body } from 'express-validator';
 import { handleValidationErrors } from '../middlewares/handleValidationErrors';
 
-const router = Router();
+const router = Router({ mergeParams: true });
 
 const createCommentController = new CreateCommentController();
 

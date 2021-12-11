@@ -10,7 +10,11 @@ export class CreateCommentController {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async handle(req: IRequest, res: Response, next: NextFunction) {
-    const dto = { text: req.body.text, user: req.user._id };
+    const dto = {
+      text: req.body.text,
+      user: req.user._id,
+      post: req.params.postId,
+    };
 
     const createCommentUseCase = new CreateCommentUseCase();
     const comment = await createCommentUseCase.execute(dto);

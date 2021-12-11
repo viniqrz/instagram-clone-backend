@@ -5,6 +5,7 @@ import { body } from 'express-validator';
 import { handleValidationErrors } from '../middlewares/handleValidationErrors';
 import { GetPostController } from '../useCases/GetPost/GetPostController';
 import { ListPostsController } from '../useCases/ListPosts/ListPostsController';
+import { commentRouter } from './commentRouter';
 
 const router = Router();
 
@@ -21,5 +22,7 @@ router.post(
   ensureAuth,
   createPostController.handle
 );
+
+router.use('/:postId/comments', commentRouter);
 
 export { router as postRouter };
