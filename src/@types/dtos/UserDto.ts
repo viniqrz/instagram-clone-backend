@@ -32,6 +32,6 @@ export interface UserWithoutPassword {
 }
 
 export interface UserAndToken {
-  user: User;
+  user: UserWithoutPassword;
   token: string;
 }

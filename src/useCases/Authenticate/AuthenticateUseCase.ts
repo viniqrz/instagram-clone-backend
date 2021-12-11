@@ -3,9 +3,13 @@ import { AppError } from '../../@types/errors/AppError';
 import { generateJwt } from '../../helpers/generateJwt';
 import { UserModel } from '../../models/User';
 import { omitPassword } from '../../helpers/omitPassword';
+import { UserAndToken } from '../../@types/dtos/UserDto';
 
 export class AuthenticateUseCase {
-  public async execute(username: string, password: string) {
+  public async execute(
+    username: string,
+    password: string
+  ): Promise<UserAndToken> {
     const authError = new AppError(401, `Invalid User or Password`);
 
     const user = await UserModel.findOne({ username });
