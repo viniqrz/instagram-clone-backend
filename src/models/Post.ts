@@ -50,7 +50,7 @@ postSchema.pre('save', function (next) {
 postSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
-    select: '-password',
+    select: '-password -followers -following -posts',
   })
     .populate({ path: 'likes', select: '-password' })
     .populate({ path: 'comments' });
