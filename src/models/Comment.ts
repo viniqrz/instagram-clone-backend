@@ -22,13 +22,13 @@ const commentSchema = new Schema<IComment>({
 });
 
 commentSchema.pre('save', function (next) {
-  this.populate({ path: 'user', select: '-password' });
+  this.populate({ path: 'user', select: '_id username avatar' });
 
   next();
 });
 
-commentSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'user', select: '-password' });
+commentSchema.pre(/find/, function (next) {
+  this.populate({ path: 'user', select: '_id username avatar' });
 
   next();
 });

@@ -38,22 +38,16 @@ postSchema.virtual('comments', {
   localField: '_id',
 });
 
-postSchema.pre('save', function (next) {
-  this.populate({
-    path: 'user',
-    select: '-password',
-  });
+postSchema.pre('findById', function (next) {
+  // this.populate({
+  //   path: 'user',
+  //   select: '-password -followers -following',
+  // });
 
-  next();
-});
+  // this.populate('')
 
-postSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'user',
-    select: '-password -followers -following -posts',
-  })
-    .populate({ path: 'likes', select: '-password' })
-    .populate({ path: 'comments' });
+  // this.populate({ path: 'likes', select: '-password' });
+  this.populate({ path: 'comments' });
 
   next();
 });

@@ -57,7 +57,7 @@ userSchema.pre('save', function (next) {
 });
 
 // userSchema.pre(/^find/, function (next) {
-//   this.populate('followersCount');
+//   this.populate({ path: 'posts', select: '-likes' });
 
 //   next();
 // });
