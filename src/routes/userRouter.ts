@@ -1,18 +1,22 @@
 import { Router } from 'express';
-import { AuthenticateController } from '../useCases/Authenticate/AuthenticateController';
-import { SignUpController } from '../useCases/SignUp/SignUpController';
 import { body } from 'express-validator';
-import { handleValidationErrors } from '../middlewares/handleValidationErrors';
-import { ListUsersController } from '../useCases/ListUsers/ListUsersController';
 import { ensureAuth } from '../middlewares/ensureAuth';
+import { handleValidationErrors } from '../middlewares/handleValidationErrors';
+import { AuthenticateController } from '../useCases/Authenticate/AuthenticateController';
+import { ListUsersController } from '../useCases/ListUsers/ListUsersController';
+import { FollowController } from '../useCases/Follow/FollowController';
+import { SignUpController } from '../useCases/SignUp/SignUpController';
 
 const router = Router();
 
 const signUpController = new SignUpController();
 const authenticateController = new AuthenticateController();
 const listUsersController = new ListUsersController();
+const followController = new FollowController();
 
 router.get('/', ensureAuth, listUsersController.handle);
+
+router.post('/:id/follow', ensureAuth, followController.handle);
 
 router.post(
   '/',
