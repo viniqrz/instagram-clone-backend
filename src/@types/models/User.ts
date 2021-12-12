@@ -9,4 +9,6 @@ export interface User {
   posts?: Schema.Types.ObjectId[];
   followers?: Schema.Types.ObjectId[];
   following?: Schema.Types.ObjectId[];
+  followersCount: number;
+  followingCount: number;
 }

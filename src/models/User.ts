@@ -40,12 +40,27 @@ const userSchema = new Schema<User>(
       type: [Schema.Types.ObjectId],
       ref: 'User',
     },
+    followersCount: Number,
+    followingCount: Number,
   },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 );
+
+userSchema.pre('save', function (next) {
+  this.followersCount = this.followers.length;
+  this.followingCount = this.following.length;
+
+  next();
+});
+
+// userSchema.pre(/^find/, function (next) {
+//   this.populate('followersCount');
+
+//   next();
+// });
 
 const UserModel = model<User>('User', userSchema);
 
