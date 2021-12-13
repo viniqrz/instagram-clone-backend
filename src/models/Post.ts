@@ -39,14 +39,6 @@ postSchema.virtual('comments', {
 });
 
 postSchema.pre('findById', function (next) {
-  // this.populate({
-  //   path: 'user',
-  //   select: '-password -followers -following',
-  // });
-
-  // this.populate('')
-
-  // this.populate({ path: 'likes', select: '-password' });
   this.populate({ path: 'comments' });
 
   next();
