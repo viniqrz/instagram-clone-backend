@@ -16,11 +16,17 @@ export class FollowUseCase {
 
     await UserModel.updateOne(
       { _id: followerObjectId },
-      { $addToSet: { following: receiverObjectId } }
+      {
+        $addToSet: { following: receiverObjectId },
+        $inc: { followingCount: 1 },
+      }
     );
     await UserModel.updateOne(
       { _id: receiverObjectId },
-      { $addToSet: { followers: followerObjectId } }
+      {
+        $addToSet: { followers: followerObjectId },
+        $inc: { followersCount: 1 },
+      }
     );
   }
 }

@@ -16,11 +16,11 @@ export class UnfollowUseCase {
 
     await UserModel.updateOne(
       { _id: followerObjectId },
-      { $pull: { following: receiverObjectId } }
+      { $pull: { following: receiverObjectId }, $inc: { followingCount: -1 } }
     );
     await UserModel.updateOne(
       { _id: receiverObjectId },
-      { $pull: { followers: followerObjectId } }
+      { $pull: { followers: followerObjectId }, $inc: { followersCount: -1 } }
     );
   }
 }
