@@ -1,20 +1,17 @@
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose from 'mongoose';
 
 import { PostModel } from '../../models/Post';
 import { AppError } from '../../@types/errors/AppError';
-import { Post } from '../../@types/models/Post';
 
 export class LikeUseCase {
-  public async execute(postId: string, userId: ObjectId): Promise<Post> {
+  public async execute(postId: string, userId: string) {
     const isIdValid = mongoose.isValidObjectId(postId);
     if (!isIdValid) throw new AppError(400, 'Post id is not valid');
 
-    const post = await PostModel.findById(postId);
-    if (!post) throw new AppError(404, 'Post not found');
-
-    post.likes.push(userId);
-    post.save();
-
-    return post;
+    const postObjectId = new mongoose.Types.ObjectId(postId);
+    await PostModel.updateOne(
+      { _id: postObjectId },
+      { $addToSet: { likes: userId } }
+    );
   }
 }

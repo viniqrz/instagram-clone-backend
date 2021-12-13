@@ -1,24 +1,26 @@
+import mongoose from 'mongoose';
+
 import { UserModel } from '../../models/User';
-import { isValidObjectId, ObjectId } from 'mongoose';
 import { AppError } from '../../@types/errors/AppError';
 
 export class FollowUseCase {
-  public async execute(followerId: ObjectId, receiverId: string) {
-    const isIdValid = isValidObjectId(receiverId);
+  public async execute(followerId: string, receiverId: string) {
+    const isIdValid = mongoose.isValidObjectId(receiverId);
     if (!isIdValid) throw new AppError(400, 'Invalid user id');
 
-    const receiver = await UserModel.findById(receiverId);
-    if (!receiver) throw new AppError(404, 'User not found');
+    const receiverObjectId = new mongoose.Types.ObjectId(receiverId);
+    const followerObjectId = new mongoose.Types.ObjectId(followerId);
 
-    const follower = await UserModel.findById(followerId);
-
-    if (follower._id === receiver._id)
+    if (receiverObjectId.equals(followerId))
       throw new AppError(400, 'Cant follow yourself');
 
-    receiver.followers.push(follower._id);
-    follower.following.push(receiver._id);
-
-    await receiver.save();
-    await follower.save();
+    await UserModel.updateOne(
+      { _id: followerObjectId },
+      { $addToSet: { following: receiverObjectId } }
+    );
+    await UserModel.updateOne(
+      { _id: receiverObjectId },
+      { $addToSet: { followers: followerObjectId } }
+    );
   }
 }

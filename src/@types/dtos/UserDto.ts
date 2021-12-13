@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { User } from '../models/User';
 
 export interface UserDto {
@@ -21,7 +21,7 @@ export interface PartialUser {
 }
 
 export interface UserWithoutPassword {
-  _id: Schema.Types.ObjectId;
+  _id: string;
   name: string;
   username: string;
   email: string;
