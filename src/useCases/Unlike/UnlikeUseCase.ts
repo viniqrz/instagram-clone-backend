@@ -10,10 +10,14 @@ export class UnlikeUseCase {
 
     const post = await PostModel.findById(postId);
 
-    await post.updateOne({
+    const { modifiedCount } = await post.updateOne({
       $pull: { likes: userId },
     });
 
-    if (post.likesCount > 0) await post.updateOne({ $inc: { likesCount: -1 } });
+    if (modifiedCount > 0) {
+      await post.updateOne({ $inc: { likesCount: -1 } });
+    } else {
+      throw new AppError(400, 'You already unliked this post');
+    }
   }
 }

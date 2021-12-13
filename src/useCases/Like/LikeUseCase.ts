@@ -14,6 +14,10 @@ export class LikeUseCase {
       $addToSet: { likes: userId },
     });
 
-    if (modifiedCount > 0) await post.updateOne({ $inc: { likesCount: 1 } });
+    if (modifiedCount > 0) {
+      await post.updateOne({ $inc: { likesCount: 1 } });
+    } else {
+      throw new AppError(400, 'You already liked this post');
+    }
   }
 }
