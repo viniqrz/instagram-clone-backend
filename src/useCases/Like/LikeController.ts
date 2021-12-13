@@ -11,11 +11,11 @@ export class LikeController {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async handle(req: IRequest, res: Response, next: NextFunction) {
     const likeUseCase = new LikeUseCase();
-    const { likes } = await likeUseCase.execute(req.params.id, req.user._id);
+    await likeUseCase.execute(req.params.id, req.user._id);
 
     res.status(200).json({
       status: 'success',
-      data: likes,
+      message: 'Like action completed!',
     });
   }
 }
