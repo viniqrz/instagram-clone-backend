@@ -11,7 +11,7 @@ export class LikeUseCase {
     const postObjectId = new mongoose.Types.ObjectId(postId);
     await PostModel.updateOne(
       { _id: postObjectId },
-      { $addToSet: { likes: userId } }
+      { $addToSet: { likes: userId }, $inc: { likesCount: 1 } }
     );
   }
 }

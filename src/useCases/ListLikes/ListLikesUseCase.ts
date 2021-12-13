@@ -8,7 +8,10 @@ export class ListLikesUseCase {
     const isIdValid = mongoose.isValidObjectId(postId);
     if (!isIdValid) throw new AppError(400, 'Post id is not valid');
 
-    const post = await PostModel.findOne({ _id: postId }, { likes: 1 });
+    const post = await PostModel.findOne(
+      { _id: postId },
+      { likes: 1 }
+    ).populate({ path: 'likes', select: '_id username avatar' });
 
     return post;
   }

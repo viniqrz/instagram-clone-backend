@@ -6,5 +6,6 @@ export interface Post {
   user: Schema.Types.ObjectId;
   comments?: Schema.Types.ObjectId[];
   likes?: Schema.Types.ObjectId[];
+  likesCount: number;
   createdAt: Date;
 }
