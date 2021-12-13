@@ -8,10 +8,12 @@ export class LikeUseCase {
     const isIdValid = mongoose.isValidObjectId(postId);
     if (!isIdValid) throw new AppError(400, 'Post id is not valid');
 
-    const postObjectId = new mongoose.Types.ObjectId(postId);
-    await PostModel.updateOne(
-      { _id: postObjectId },
-      { $addToSet: { likes: userId }, $inc: { likesCount: 1 } }
-    );
+    const post = await PostModel.findById(postId);
+
+    const { modifiedCount } = await post.updateOne({
+      $addToSet: { likes: userId },
+    });
+
+    if (modifiedCount > 0) await post.updateOne({ $inc: { likesCount: 1 } });
   }
 }

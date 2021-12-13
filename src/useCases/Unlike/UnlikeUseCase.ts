@@ -8,10 +8,12 @@ export class UnlikeUseCase {
     const isIdValid = mongoose.isValidObjectId(postId);
     if (!isIdValid) throw new AppError(400, 'Post id is not valid');
 
-    const postObjectId = new mongoose.Types.ObjectId(postId);
-    await PostModel.updateOne(
-      { _id: postObjectId },
-      { $pull: { likes: userId }, $inc: { likesCount: -1 } }
-    );
+    const post = await PostModel.findById(postId);
+
+    await post.updateOne({
+      $pull: { likes: userId },
+    });
+
+    if (post.likesCount > 0) await post.updateOne({ $inc: { likesCount: -1 } });
   }
 }

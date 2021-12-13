@@ -24,6 +24,7 @@ const postSchema = new Schema<Post>(
     likesCount: {
       type: Number,
       default: 0,
+      min: 0,
     },
     createdAt: {
       type: Date,

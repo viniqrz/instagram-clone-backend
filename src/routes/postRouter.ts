@@ -9,6 +9,7 @@ import { GetPostController } from '../useCases/GetPost/GetPostController';
 import { ListPostsController } from '../useCases/ListPosts/ListPostsController';
 import { ListLikesController } from '../useCases/ListLikes/ListLikesController';
 import { LikeController } from '../useCases/Like/LikeController';
+import { UnlikeController } from '../useCases/Unlike/UnlikeController';
 
 const router = Router();
 
@@ -17,11 +18,13 @@ const getPostController = new GetPostController();
 const listPostsControler = new ListPostsController();
 const listLikesController = new ListLikesController();
 const likeController = new LikeController();
+const unlikeController = new UnlikeController();
 
 router.get('/', listPostsControler.handle);
 router.get('/:id', getPostController.handle);
 router.get('/:id/likes', listLikesController.handle);
 router.post('/:id/likes', ensureAuth, likeController.handle);
+router.delete('/:id/likes', ensureAuth, unlikeController.handle);
 router.post(
   '/',
   body(['text', 'file']).exists(),
