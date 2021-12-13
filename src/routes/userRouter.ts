@@ -19,7 +19,8 @@ const getUserController = new GetUserController();
 router.get('/', ensureAuth, listUsersController.handle);
 router.get('/:id', getUserController.handle);
 
-router.post('/:id/follow', ensureAuth, followController.handle);
+// router.get('/:id/followers', )
+router.post('/:id/followers', ensureAuth, followController.handle);
 router.post(
   '/',
   body(['password', 'email', 'username', 'name']).exists(),

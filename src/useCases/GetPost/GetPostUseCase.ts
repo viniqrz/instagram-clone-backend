@@ -8,7 +8,7 @@ export class GetPostUseCase {
     const isIdValid = isValidObjectId(id);
     if (!isIdValid) throw new AppError(400, 'Id is not valid');
 
-    const post = await PostModel.findById(id).populate({ path: 'comments' });
+    const post = await PostModel.findById(id);
     if (!post) throw new AppError(404, 'Post not found');
 
     return post;
