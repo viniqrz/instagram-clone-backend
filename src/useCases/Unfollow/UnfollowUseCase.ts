@@ -14,13 +14,35 @@ export class UnfollowUseCase {
     if (receiverObjectId.equals(followerId))
       throw new AppError(400, 'Cant unfollow yourself');
 
-    await UserModel.updateOne(
+    const { modifiedCount } = await UserModel.updateOne(
       { _id: followerObjectId },
-      { $pull: { following: receiverObjectId }, $inc: { followingCount: -1 } }
+      { $pull: { following: receiverObjectId } }
     );
+
     await UserModel.updateOne(
       { _id: receiverObjectId },
       { $pull: { followers: followerObjectId }, $inc: { followersCount: -1 } }
+    );
+
+    if (modifiedCount > 0) {
+      this.decrementCount(receiverObjectId, followerObjectId);
+    } else {
+      throw new AppError(400, 'You do not follow this user');
+    }
+  }
+
+  private async decrementCount(
+    receiverId: mongoose.Types.ObjectId,
+    followerId: mongoose.Types.ObjectId
+  ) {
+    await UserModel.updateOne(
+      { _id: followerId },
+      { $inc: { followingCount: -1 } }
+    );
+
+    await UserModel.updateOne(
+      { _id: receiverId },
+      { $inc: { followersCount: -1 } }
     );
   }
 }

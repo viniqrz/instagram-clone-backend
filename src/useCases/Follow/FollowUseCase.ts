@@ -14,19 +14,41 @@ export class FollowUseCase {
     if (receiverObjectId.equals(followerId))
       throw new AppError(400, 'Cant follow yourself');
 
-    await UserModel.updateOne(
+    const { modifiedCount } = await UserModel.updateOne(
       { _id: followerObjectId },
       {
         $addToSet: { following: receiverObjectId },
-        $inc: { followingCount: 1 },
       }
     );
+
     await UserModel.updateOne(
       { _id: receiverObjectId },
       {
         $addToSet: { followers: followerObjectId },
+      }
+    );
+
+    if (modifiedCount > 0) {
+      this.incrementCount(receiverObjectId, followerObjectId);
+    } else {
+      throw new AppError(400, 'You already follow this user');
+    }
+  }
+
+  private async incrementCount(
+    receiverId: mongoose.Types.ObjectId,
+    followerId: mongoose.Types.ObjectId
+  ) {
+    await UserModel.updateOne(
+      { _id: receiverId },
+      {
         $inc: { followersCount: 1 },
       }
+    );
+
+    await UserModel.updateOne(
+      { _id: followerId },
+      { $inc: { followingCount: 1 } }
     );
   }
 }
