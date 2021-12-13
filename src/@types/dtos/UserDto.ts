@@ -1,5 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
-import { User } from '../models/User';
+import { Schema } from 'mongoose';
 
 export interface UserDto {
   name: string;
