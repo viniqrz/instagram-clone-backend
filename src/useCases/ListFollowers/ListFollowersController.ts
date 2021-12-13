@@ -13,9 +13,7 @@ export class ListFollowersController {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ): Promise<void> {
-    const followers = await new ListFollowersUseCase().execute(
-      req.params.postId
-    );
+    const followers = await new ListFollowersUseCase().execute(req.params.id);
 
     res.json({
       status: 'success',

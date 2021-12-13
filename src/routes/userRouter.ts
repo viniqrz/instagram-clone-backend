@@ -7,6 +7,7 @@ import { ListUsersController } from '../useCases/ListUsers/ListUsersController';
 import { FollowController } from '../useCases/Follow/FollowController';
 import { SignUpController } from '../useCases/SignUp/SignUpController';
 import { GetUserController } from '../useCases/GetUser/GetUserController';
+import { ListFollowersController } from '../useCases/ListFollowers/ListFollowersController';
 
 const router = Router();
 
@@ -14,12 +15,13 @@ const signUpController = new SignUpController();
 const authenticateController = new AuthenticateController();
 const listUsersController = new ListUsersController();
 const followController = new FollowController();
+const listFollowersController = new ListFollowersController();
 const getUserController = new GetUserController();
 
 router.get('/', ensureAuth, listUsersController.handle);
 router.get('/:id', getUserController.handle);
 
-// router.get('/:id/followers', )
+router.get('/:id/followers', listFollowersController.handle);
 router.post('/:id/followers', ensureAuth, followController.handle);
 router.post(
   '/',
