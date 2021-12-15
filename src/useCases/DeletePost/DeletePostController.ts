@@ -14,7 +14,7 @@ export class DeletePostController {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ): Promise<void> {
-    await new DeletePostUseCase().execute(req.params.postId, req.user._id);
+    await new DeletePostUseCase().execute(req.params.id, req.user._id);
 
     res.json({
       status: 'success',
