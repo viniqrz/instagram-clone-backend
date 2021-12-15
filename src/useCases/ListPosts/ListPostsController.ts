@@ -13,7 +13,7 @@ export class ListPostsController {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ): Promise<void> {
-    const posts = await new ListPostsUseCase().execute();
+    const posts = await new ListPostsUseCase().execute(req.query);
 
     res.json({
       status: 'success',
