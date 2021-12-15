@@ -1,5 +1,3 @@
-import 'dotev/config';
-
 import crypto from 'crypto';
 
 export const createHash = (text: string) => {
