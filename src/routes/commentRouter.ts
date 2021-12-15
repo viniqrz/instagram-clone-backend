@@ -13,7 +13,7 @@ const listCommentsController = new ListCommentsController();
 const deleteCommentController = new DeleteCommentController();
 
 router.get('/', listCommentsController.handle);
-router.delete('/', ensureAuth, deleteCommentController.handle)
+router.delete('/:commentId', ensureAuth, deleteCommentController.handle);
 router.post(
   '/',
   body(['text']).exists(),

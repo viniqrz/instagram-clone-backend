@@ -1,4 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
+import { IRequest } from '../../@types/express/IRequest';
 import { catchAsync } from '../../helpers/catchAsync';
 import { DeleteCommentUseCase } from './DeleteCommentUseCase';
 
@@ -8,13 +9,15 @@ export class DeleteCommentController {
   }
 
   public async handle(
-    req: Request,
+    req: IRequest,
     res: Response,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ): Promise<void> {
-    await new DeleteCommentUseCase()
-      .execute(req.params.commentId, req.user._id);
+    await new DeleteCommentUseCase().execute(
+      req.params.commentId,
+      req.user._id
+    );
 
     res.json({
       status: 'success',

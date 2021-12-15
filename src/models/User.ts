@@ -43,19 +43,6 @@ const userSchema = new Schema<User>({
   followingCount: Number,
 });
 
-// userSchema.pre('save', function (next) {
-//   this.followersCount = this.followers.length;
-//   this.followingCount = this.following.length;
-
-//   next();
-// });
-
-// userSchema.pre(/^find/, function (next) {
-//   this.populate({ path: 'posts', select: '-likes' });
-
-//   next();
-// });
-
 const UserModel = model<User>('User', userSchema);
 
 export { UserModel };
