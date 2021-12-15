@@ -1,6 +1,6 @@
 # Instagram Clone (Social Network API v1)
 
-An open-source Social network API, based on instagram features.
+An open-source social network API, based on instagram features.
 
 ### Pre-requisites
 
