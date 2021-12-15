@@ -10,6 +10,7 @@ import { SignUpController } from '../useCases/SignUp/SignUpController';
 import { GetUserController } from '../useCases/GetUser/GetUserController';
 import { ListFollowersController } from '../useCases/ListFollowers/ListFollowersController';
 import { UnfollowController } from '../useCases/Unfollow/UnfollowController';
+import { UpdateMeController } from '../useCases/UpdateMe/UpdateMeController';
 
 const router = Router();
 
@@ -20,9 +21,12 @@ const followController = new FollowController();
 const listFollowersController = new ListFollowersController();
 const getUserController = new GetUserController();
 const unfollowController = new UnfollowController();
+const updateMeController = new UpdateMeController();
 
 router.get('/', ensureAuth, listUsersController.handle);
 router.get('/:id', getUserController.handle);
+
+router.patch('/me', ensureAuth, updateMeController.handle);
 
 router.get('/:id/followers', listFollowersController.handle);
 router.post('/:id/followers', ensureAuth, followController.handle);
