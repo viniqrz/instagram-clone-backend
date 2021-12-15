@@ -13,7 +13,8 @@ export class DeleteCommentController {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ): Promise<void> {
-    await new DeleteCommentUseCase().execute(req.params.commentId);
+    await new DeleteCommentUseCase()
+      .execute(req.params.commentId, req.user._id);
 
     res.json({
       status: 'success',
