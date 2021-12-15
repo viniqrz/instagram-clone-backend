@@ -12,6 +12,7 @@ import { ListFollowersController } from '../useCases/ListFollowers/ListFollowers
 import { UnfollowController } from '../useCases/Unfollow/UnfollowController';
 import { UpdateMeController } from '../useCases/UpdateMe/UpdateMeController';
 import { ForgotPasswordController } from '../useCases/ForgotPassword/ForgotPasswordController';
+import { ResetPasswordController } from '../useCases/ResetPassword/ResetPasswordController';
 
 const router = Router();
 
@@ -23,7 +24,8 @@ const listFollowersController = new ListFollowersController();
 const getUserController = new GetUserController();
 const unfollowController = new UnfollowController();
 const updateMeController = new UpdateMeController();
-const forgotPassword = new ForgotPasswordController();
+const forgotPasswordController = new ForgotPasswordController();
+const resetPasswordController = new ResetPasswordController();
 
 router.get('/', ensureAuth, listUsersController.handle);
 router.get('/:id', getUserController.handle);
@@ -33,7 +35,13 @@ router.post(
   '/forgot-password',
   body('email').exists(),
   handleValidationErrors,
-  forgotPassword.handle
+  forgotPasswordController.handle
+);
+router.patch(
+  '/reset-password',
+  body(['token', 'password']).exists(),
+  handleValidationErrors,
+  resetPasswordController.handle
 );
 
 router.get('/:id/followers', listFollowersController.handle);

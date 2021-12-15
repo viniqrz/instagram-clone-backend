@@ -15,13 +15,13 @@ export class ResetPasswordUseCase {
 
     const { createdAt, user } = resetDocument;
 
-    const expirationDate = dayjs(createdAt).add(10, 'minute');
-    const hasExpired = dayjs(createdAt).isAfter(expirationDate);
+    const expirationDate = dayjs(createdAt).add(5, 'minute');
+    const hasExpired = dayjs().isAfter(expirationDate);
 
     if (hasExpired) throw new AppError(400, 'Token has expired');
 
     const passwordHash = await bcrypt.hash(password, 8);
 
-    UserModel.findByIdAndUpdate(user, { password: passwordHash });
+    await UserModel.findByIdAndUpdate(user, { password: passwordHash });
   }
 }
